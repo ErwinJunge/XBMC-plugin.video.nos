@@ -38,8 +38,9 @@ def index():
                     u'label': category_text,
                     u'path': {
                         u'endpoint': u'show_category',
-                        u'category_url': u'https://nos.nl{category_url}'.format(
-                            category_url=category_url,
+                        u'category_url': (
+                            u'https://nos.nl{category_url}'
+                            .format(category_url=category_url)
                         ),
                     },
                 }
@@ -54,9 +55,15 @@ def show_category(category_url):
         url=category_url,
     )
     soup = BeautifulSoup(response.content)
-    videos = soup.findAll(u'li', {u'class': u'broadcast-player__playlist__item'})
+    videos = soup.findAll(
+        u'li',
+        {u'class': u'broadcast-player__playlist__item'},
+    )
     for video in videos:
-        title = video.findAll(u'span', {u'class': u'broadcast-link__name '})[0].text
+        title = video.findAll(
+            u'span',
+            {u'class': u'broadcast-link__name '},
+        )[0].text
         timecode = video.findAll(u'time')[0][u'datetime']
         parsed_timecode = datetimeparse(timecode)
         label = u'{title} {time}'.format(
@@ -90,7 +97,9 @@ def video_url_to_file_url(video_url):
     sources = video.findAll(u'source')
     sources = sorted(
         sources,
-        key=lambda source: int(quality_re.search(source[u'data-label']).group(0)),
+        key=lambda source: int(
+            quality_re.search(source[u'data-label']).group(0)
+        ),
         reverse=True,
     )
     preferred_source = sources[0]
@@ -105,6 +114,3 @@ def video_url_to_file_url(video_url):
     else:
         url = preferred_source['src']
     return url
-
-
-# curl 'https://nos.nl/video/resolve/' -H 'Host: nos.nl' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Referer: https://nos.nl/uitzending/28084-nos-sportjournaal.html' -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' -H 'X-Requested-With: XMLHttpRequest' -H 'Cookie: npo_meta_cc_nos.nl=2.2.0:7; npo_cc_nos.nl=127' -H 'DNT: 1' -H 'Connection: keep-alive' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' --data '[{"file":"https://download.omroep.nl/nos/content-ip/mp4/web02/2017/10/06/28084/mp4_web02_backup.mp4"}]'
