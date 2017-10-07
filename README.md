@@ -1,6 +1,6 @@
 # plugin.video.nos
-[![Build Status](https://travis-ci.org/ErwinJunge/plugin.video.nos.svg?branch=master)](https://travis-ci.org/ErwinJunge/plugin.video.nos)
-[![Coverage Status](https://coveralls.io/repos/github/ErwinJunge/plugin.video.nos/badge.svg?branch=master)](https://coveralls.io/github/ErwinJunge/plugin.video.nos?branch=master)
+[![Build Status](https://travis-ci.org/ErwinJunge/XBMC-plugin.video.nos.svg?branch=master)](https://travis-ci.org/ErwinJunge/XBMC-plugin.video.nos)
+[![Coverage Status](https://coveralls.io/repos/github/ErwinJunge/XBMC-plugin.video.nos/badge.svg?branch=master)](https://coveralls.io/github/ErwinJunge/XBMC-plugin.video.nos?branch=master)
 
 This is a video addon for Kodi that pulls videos from the NOS (Dutch news channel).
 
